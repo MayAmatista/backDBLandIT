@@ -59,15 +59,7 @@ router.delete('/courses/:id/students/:idStudent', (req, res) => {
                 console.log('El estudiante ha sido eliminado correctamente');
             }
         })
-
-    courseSchema.findById(courseId, (error, course) => {
-        console.log(course);
-    })
-
 })
-
-//the best student of a course
-
 
 
 module.exports = router;
