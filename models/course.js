@@ -1,20 +1,17 @@
 const mongoose = require('mongoose');
 
 const courseSchema = mongoose.Schema({
-    year_of_dictation:{
+    yearOfDictation:{
         type: Number,
-        required: true,
-        default: 2022
+        required: true
     },
     duration:{
         type: String,
-        required: true,
-        default: ''
+        required: true
     },
     theme:{
         type: String,
-        required: true,
-        default: ''
+        required: true
     },
     students:{
         type: Array,

@@ -7,16 +7,27 @@ const { db } = require('../models/course');
 const router = express.Router();
 const jsonParser = bodyParser.json()
 
-//get all courses
+//get all courses simplified
+
+function getSimplifiedCourses(courses){
+    return courses.map(course => {
+        return { 
+            "theme": course.theme, 
+            "yearOfDictation": course.yearOfDictation 
+        }
+    })
+}
 
 router.get('/courses', (req, res) => {
     courseSchema
     .find()
-    .then(((data) => res.json(data)))
+    .then((data) => getSimplifiedCourses(data))
+    .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }));
 })
 
 //get all students in a course
+
 
 router.get('/courses/:id/students', (req, res) => {
     const {id} = req.params;
@@ -35,7 +46,7 @@ router.get('/courses/:id', (req, res) => {
     .catch((error) => res.json({ message: error }));
 })
 
-//post a course
+//add a course
 router.post('/courses', jsonParser, (req, res) => {
     const course = courseSchema(req.body);
     course.save()

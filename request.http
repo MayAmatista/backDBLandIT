@@ -2,32 +2,32 @@
 GET http://localhost:4000/courses HTTP/1.1
 
 ###
-GET http://localhost:4000/courses/633ee680556cd7776a5ea787 HTTP/1.1
+GET http://localhost:4000/courses/633f3a6305bff0b4aa5ff072 HTTP/1.1
 ###
-GET http://localhost:4000/courses/633ef4293b8db1dab50b4de1/students HTTP/1.1
+GET http://localhost:4000/courses/63418ebf788a54d1e72b39dd/students HTTP/1.1
 ###
 POST http://localhost:4000/courses HTTP/1.1
 Content-Type: application/json
 
 {
-    "year_of_dictation": 2023,
+    "yearOfDictation": 2023,
     "duration": "2 months",
-    "theme": "Bases de datos no relacionales",
-    "students":[
-        {
-        "name": "Prueba",
-        "last_name": "Prueba",
-        "dni": 123456,
-        "adress": "calle falsa 123"
-    },
-    {
-        "name": "Prueba2",
-        "last_name": "Prueba2",
-        "dni": 1234565,
-        "adress": "calle falsa 1234"
-    }
-    ]
+    "theme": "Bases de datos no relacionales"
 }
 
 ###
-DELETE http://localhost:4000/courses/633ee680556cd7776a5ea787 HTTP/1.1
+POST http://localhost:4000/courses/63419c751d60b1803a1d9ddc/students HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "PRUEBA6",
+    "lastName": "Prueba 2",
+    "dni": 123456789,
+    "adress": "calle 1 534",
+    "note": 8
+}
+
+###
+DELETE http://localhost:4000/courses/63419c751d60b1803a1d9ddc/students/63419c811d60b1803a1d9dde HTTP/1.1
+###
+DELETE http://localhost:4000/courses/63418ebf788a54d1e72b39dd HTTP/1.1
