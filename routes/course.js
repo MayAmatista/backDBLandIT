@@ -13,6 +13,7 @@ const jsonParser = bodyParser.json()
 function getSimplifiedCourses(courses) {
     return courses.map(course => {
         return {
+            "id": course._id,
             "theme": course.theme,
             "yearOfDictation": course.yearOfDictation
         }
@@ -29,7 +30,6 @@ router.get('/courses', (req, res) => {
 
 //get all students in a course
 
-
 router.get('/courses/:id/students', (req, res) => {
     const { id } = req.params;
     courseSchema
@@ -40,8 +40,31 @@ router.get('/courses/:id/students', (req, res) => {
 
 //the best student of a course
 
+router.get('/courses/:id/bestStudent', (req, res) => {
+    courseSchema.aggregate([
+        { $match: { _id: mongoose.mongo.ObjectId(req.params.id) } },
+        { $unwind: "$students" },
+        { $sort: {
+            "students.note": -1
+            }
+        },
+        { $project: {
+                students: 1,
+                _id: 0
+            }
+        },
+        { $limit: 1}
+    ], (error, data) => {
+        if (error) {
+            res.json({ message: error })
+        } else {
+            res.json(data[0].students)
+        }
+    });
+})
 
 //get a course
+
 router.get('/courses/:id', (req, res) => {
     const { id } = req.params;
     courseSchema
@@ -51,6 +74,7 @@ router.get('/courses/:id', (req, res) => {
 })
 
 //add a course
+
 router.post('/courses', jsonParser, (req, res) => {
     const course = courseSchema(req.body);
     course.save()
@@ -59,6 +83,7 @@ router.post('/courses', jsonParser, (req, res) => {
 })
 
 //delete a course
+
 router.delete('/courses/:id', (req, res) => {
     let courseId = req.params.id;
 

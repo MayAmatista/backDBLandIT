@@ -9,8 +9,8 @@ const { default: mongoose } = require('mongoose');
 const router = express.Router();
 const jsonParser = bodyParser.json()
 
-
 //add a student
+
 router.post('/courses/:id/students', jsonParser, (req, res) => {
     let courseId = req.params.id;
 
@@ -34,6 +34,7 @@ router.post('/courses/:id/students', jsonParser, (req, res) => {
 })
 
 //delete a student
+
 router.delete('/courses/:id/students/:idStudent', (req, res) => {
     let studentId = req.params.idStudent;
     let courseId = req.params.id;
@@ -43,9 +44,9 @@ router.delete('/courses/:id/students/:idStudent', (req, res) => {
         { $pull: { students: { _id: mongoose.mongo.ObjectId(studentId) } } },
         (error, success) => {
             if (error) {
-                console.log(`el estudiante no se puede eliminar del curso ${error}`);
+                res.json(error);
             } else {
-                console.log('El estudiante fue eliminado del curso');
+                res.json(success);
             }
         }
     )
@@ -54,9 +55,9 @@ router.delete('/courses/:id/students/:idStudent', (req, res) => {
         studentId,
         (error, success) => {
             if (error) {
-                console.log(`El estudiante no pudo ser eliminado ${error}`);
+                res.json(error);
             } else {
-                console.log('El estudiante ha sido eliminado correctamente');
+                res.json(success);
             }
         })
 })

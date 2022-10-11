@@ -15,7 +15,7 @@ const courseSchema = mongoose.Schema({
     },
     students:{
         type: Array,
-        required: true,
+        required: false,
         default: []
     }
 })

@@ -2,10 +2,10 @@
 GET http://localhost:4000/courses HTTP/1.1
 
 ###
-GET http://localhost:4000/courses/63419c751d60b1803a1d9ddc/bestStudent HTTP/1.1
+GET http://localhost:4000/courses/6342e5bf1ed59e43e6951abb/bestStudent HTTP/1.1
 
 ###
-GET http://localhost:4000/courses/633f3a6305bff0b4aa5ff072 HTTP/1.1
+GET http://localhost:4000/courses/63419c751d60b1803a1d9ddc HTTP/1.1
 ###
 GET http://localhost:4000/courses/63419c751d60b1803a1d9ddc/students HTTP/1.1
 ###
@@ -15,7 +15,7 @@ Content-Type: application/json
 {
     "yearOfDictation": 2020,
     "duration": "2 months",
-    "theme": "IA"
+    "theme": "React"
 }
 
 ###
