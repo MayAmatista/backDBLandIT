@@ -39,6 +39,8 @@ router.delete('/courses/:id/students/:idStudent', (req, res) => {
     let studentId = req.params.idStudent;
     let courseId = req.params.id;
 
+    studentSchema.findByIdAndRemove(studentId)
+    
     courseSchema.findByIdAndUpdate(
         courseId,
         { $pull: { students: { _id: mongoose.mongo.ObjectId(studentId) } } },
@@ -50,16 +52,6 @@ router.delete('/courses/:id/students/:idStudent', (req, res) => {
             }
         }
     )
-
-    studentSchema.findByIdAndRemove(
-        studentId,
-        (error, success) => {
-            if (error) {
-                res.json(error);
-            } else {
-                res.json(success);
-            }
-        })
 })
 
 
